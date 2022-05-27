@@ -2,7 +2,6 @@ package com.example.calc_new
 
 
 import android.util.Log
-import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.lang.Exception
 
@@ -11,10 +10,14 @@ class Presenter {
 
     companion object {
         const val TAG = "TAG_Presenter -> "
-        const val  ERROR_MESSAGE = "< Error > "
+        const val  ERROR_MESSAGE = "< Error >"
+
     }
 
+
     fun calculate(stringCalc: String): String {
+        Log.e(TAG,"Presenter.calculate")
+
         var res:String
         try {
             val calc = ExpressionBuilder(stringCalc).build()

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.example.calc_new.databinding.ActivityMainBinding
 
 
@@ -21,11 +22,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.e(TAG, "ON_CREATE")
 
         listOfButtonListener(binding)
     }
 
-    private fun showResult(binding: ActivityMainBinding){
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG, "ON_START")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG, "ON_RESTART")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG, "ON_RESUME")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG, "ON_PAUSE")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG, "ON_STOP")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(TAG, "ON_DESTROY")
+    }
+
+
+    private fun showResult(binding: ActivityMainBinding) {
         binding.resString.text = presenter.calculate(binding.mathString.text.toString())
     }
 
@@ -164,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             backEndSymbol(binding)
         }
 
-        binding.buttonRavno.setOnClickListener(){
+        binding.buttonRavno.setOnClickListener() {
             showResult(binding)
         }
     }
