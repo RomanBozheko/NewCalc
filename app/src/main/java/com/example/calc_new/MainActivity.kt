@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
         Log.e(TAG, "ON_RESTART")
     }
 
-    override fun onResume() {
+    /**/    override fun onResume() {
         super.onResume()
         Log.e(TAG, "ON_RESUME")
     }
 
-    override fun onPause() {
+    /**/    override fun onPause() {
         super.onPause()
         Log.e(TAG, "ON_PAUSE")
     }
@@ -63,14 +63,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun backEndSymbol(binding: ActivityMainBinding) {
-
-//        binding.mathString.text.toString().dropLast(1)
-
         val str = binding.mathString.text.toString()
         if (str.isNotEmpty()) {
-            binding.mathString.text = str.substring(0, str.length - 1)
+//            binding.mathString.text = str.substring(0, str.length - 1)
+            binding.mathString.text = str.dropLast(1)
         }
-
     }
 
     private fun clearText(binding: ActivityMainBinding) {
@@ -145,7 +142,6 @@ class MainActivity : AppCompatActivity() {
                 binding
             )
         }
-
 
         binding.buttonOpen.setOnClickListener() {
             setTextFields(
