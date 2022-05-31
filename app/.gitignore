@@ -1,1 +1,14 @@
-/build
+build/
+app/build/
+.navigation/
+.idea/
+.gradle/
+local.properties
+MaterialNavigationDrawerModule/build/
+/*/out
+/*/*/build
+/*/*/production
+*.iws
+*.ipr
+*~
+*.swp

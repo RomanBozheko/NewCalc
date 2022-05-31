@@ -3,200 +3,149 @@ package com.example.calc_new
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.Toast
+import com.example.calc_new.Interface.MyMainActiviteView
 import com.example.calc_new.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyMainActiviteView {
 
     companion object {
-        const val TAG = "TAG_MainActivity -> "
+        const val TAG = "TAG_MainActivity-> "
         const val CLEAR_STRING = ""
     }
 
     private val presenter = Presenter()
-
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.e(TAG, "ON_CREATE")
 
-        listOfButtonListener(binding)
+        Log.d(TAG, "ON_CREATE")
+
+
+        presenter.bindView(this)
+        listOfButtonListener()
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.e(TAG, "ON_START")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.e(TAG, "ON_RESTART")
-    }
-
-    /**/    override fun onResume() {
-        super.onResume()
-        Log.e(TAG, "ON_RESUME")
-    }
-
-    /**/    override fun onPause() {
-        super.onPause()
-        Log.e(TAG, "ON_PAUSE")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e(TAG, "ON_STOP")
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        Log.e(TAG, "ON_DESTROY")
+        Log.d(TAG, "ON_DESTROY")
+        presenter.unBindView()
     }
-
-
-    private fun showResult(binding: ActivityMainBinding) {
-        binding.resString.text = presenter.calculate(binding.mathString.text.toString())
+    override fun onResult(str: String) {
+        binding.resString.text = str
     }
-
-    private fun backEndSymbol(binding: ActivityMainBinding) {
-        val str = binding.mathString.text.toString()
-        if (str.isNotEmpty()) {
-//            binding.mathString.text = str.substring(0, str.length - 1)
-            binding.mathString.text = str.dropLast(1)
-        }
+    override fun withOutLastSymbol(str: String) {
+        binding.mathString.text = str
     }
-
-    private fun clearText(binding: ActivityMainBinding) {
+    override fun clearText() {
         binding.mathString.text = CLEAR_STRING
         binding.resString.text = CLEAR_STRING
     }
-
-    private fun setTextFields(str: String, binding: ActivityMainBinding) {
-        Log.e(TAG, "setTextFields")
+    override fun setTextFields(str: String) {
+        Log.d(TAG, "setTextFields")
         binding.mathString.append(str)
     }
-
-    private fun listOfButtonListener(binding: ActivityMainBinding) {
-        Log.e(TAG, "listOfButtonListener")
+    override fun listOfButtonListener() {
+        Log.d(TAG, "listOfButtonListener")
         binding.buttonNine.setOnClickListener() {
             setTextFields(
-                binding.buttonNine.text.toString(),
-                binding
+                binding.buttonNine.text.toString()
             )
         }
         binding.buttonEight.setOnClickListener() {
             setTextFields(
-                binding.buttonEight.text.toString(),
-                binding
+                binding.buttonEight.text.toString()
             )
         }
         binding.buttonSeven.setOnClickListener() {
             setTextFields(
-                binding.buttonSeven.text.toString(),
-                binding
+                binding.buttonSeven.text.toString()
             )
         }
         binding.buttonSix.setOnClickListener() {
             setTextFields(
-                binding.buttonSix.text.toString(),
-                binding
+                binding.buttonSix.text.toString()
             )
         }
         binding.buttonFive.setOnClickListener() {
             setTextFields(
-                binding.buttonFive.text.toString(),
-                binding
+                binding.buttonFive.text.toString()
             )
         }
         binding.buttonFour.setOnClickListener() {
             setTextFields(
-                binding.buttonFour.text.toString(),
-                binding
+                binding.buttonFour.text.toString()
             )
         }
         binding.buttonThree.setOnClickListener() {
             setTextFields(
-                binding.buttonThree.text.toString(),
-                binding
+                binding.buttonThree.text.toString()
             )
         }
         binding.buttonTwo.setOnClickListener() {
             setTextFields(
-                binding.buttonTwo.text.toString(),
-                binding
+                binding.buttonTwo.text.toString()
             )
         }
         binding.buttonOne.setOnClickListener() {
             setTextFields(
-                binding.buttonOne.text.toString(),
-                binding
+                binding.buttonOne.text.toString()
             )
         }
         binding.buttonZero.setOnClickListener() {
             setTextFields(
-                binding.buttonZero.text.toString(),
-                binding
+                binding.buttonZero.text.toString()
             )
         }
-
         binding.buttonOpen.setOnClickListener() {
             setTextFields(
-                binding.buttonOpen.text.toString(),
-                binding
+                binding.buttonOpen.text.toString()
             )
         }
         binding.buttonClose.setOnClickListener() {
             setTextFields(
-                binding.buttonClose.text.toString(),
-                binding
+                binding.buttonClose.text.toString()
             )
         }
         binding.buttonPoint.setOnClickListener() {
             setTextFields(
-                binding.buttonPoint.text.toString(),
-                binding
+                binding.buttonPoint.text.toString()
             )
         }
-
         binding.buttonDivide.setOnClickListener() {
             setTextFields(
-                binding.buttonDivide.text.toString(),
-                binding
+                binding.buttonDivide.text.toString()
             )
         }
         binding.buttonMultiply.setOnClickListener() {
             setTextFields(
-                binding.buttonMultiply.text.toString(),
-                binding
+                binding.buttonMultiply.text.toString()
             )
         }
         binding.buttonPlus.setOnClickListener() {
             setTextFields(
-                binding.buttonPlus.text.toString(),
-                binding
+                binding.buttonPlus.text.toString()
             )
         }
         binding.buttonMinus.setOnClickListener() {
             setTextFields(
-                binding.buttonMinus.text.toString(),
-                binding
+                binding.buttonMinus.text.toString()
             )
         }
         binding.buttonClear.setOnClickListener() {
-            clearText(binding)
+            clearText()
         }
         binding.buttonBack.setOnClickListener() {
-            backEndSymbol(binding)
+            presenter.backEndSymbol(binding.mathString.text.toString())
         }
-
         binding.buttonRavno.setOnClickListener() {
-            showResult(binding)
+            presenter.calculate(binding.mathString.text.toString())
         }
     }
+
+
 }
 
 
