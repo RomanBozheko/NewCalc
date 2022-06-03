@@ -6,7 +6,6 @@ import android.util.Log
 import com.example.calc_new.Interface.MyMainActiviteView
 import com.example.calc_new.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity(), MyMainActiviteView {
 
     companion object {
@@ -24,29 +23,34 @@ class MainActivity : AppCompatActivity(), MyMainActiviteView {
 
         Log.d(TAG, "ON_CREATE")
 
-
         presenter.bindView(this)
         listOfButtonListener()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "ON_DESTROY")
         presenter.unBindView()
     }
+
     override fun onResult(str: String) {
         binding.resString.text = str
     }
+
     override fun withOutLastSymbol(str: String) {
         binding.mathString.text = str
     }
+
     override fun clearText() {
         binding.mathString.text = CLEAR_STRING
         binding.resString.text = CLEAR_STRING
     }
+
     override fun setTextFields(str: String) {
         Log.d(TAG, "setTextFields")
         binding.mathString.append(str)
     }
+
     override fun listOfButtonListener() {
         Log.d(TAG, "listOfButtonListener")
         binding.buttonNine.setOnClickListener() {

@@ -31,7 +31,7 @@ class Presenter : MyPresenter {
         var res: String
         try {
             val calc = ExpressionBuilder(stringCalc).build()
-            res = calc.evaluate().toString()
+            res = calc.evaluate().toLong().toString()
         } catch (e: Exception) {
             res = ERROR_MESSAGE
             Log.e(TAG, e.message.toString())
